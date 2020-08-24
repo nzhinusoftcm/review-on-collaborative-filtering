@@ -1,4 +1,4 @@
-This repository presents a comprehensive implementation of collaborative filtering recommender systems. It starts by implementing basics collaborative filtering algorithms such as <b>user-based</b> collaborative filering also known as user-to-user collaborative filtering and <b>item-based</b> collaborative filtering (item-to-item collaborative filtering).
+This repository presents a comprehensive implementation of collaborative filtering recommender systems, from memory-based collaborative filtering to more advanced machine learning algorithms. It starts by implementing basics collaborative filtering algorithms such as <b>user-based</b> collaborative filering also known as user-to-user collaborative filtering and <b>item-based</b> collaborative filtering (item-to-item collaborative filtering).
 
 ## Requirements
 
