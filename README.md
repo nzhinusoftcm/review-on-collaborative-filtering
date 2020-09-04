@@ -22,7 +22,7 @@ This repository presents a comprehensive implementation of collaborative filteri
 ## References
 
 1. Daniel Billsus  and  Michael J. Pazzani (1998). [Learning Collaborative Information Filters](https://www.ics.uci.edu/~pazzani/Publications/MLC98.pdf)
-2.Herlocker et al. (1999)<a href="https://dl.acm.org/doi/10.1145/3130348.3130372"> An Algorithmic Framework for Performing Collaborative Filtering</a>
+2. Herlocker et al. (1999)<a href="https://dl.acm.org/doi/10.1145/3130348.3130372"> An Algorithmic Framework for Performing Collaborative Filtering</a>
 3. Sarwar et al. (2000). [Application of Dimensionality Reduction in Recommender System -- A Case Study](http://files.grouplens.org/papers/webKDD00.pdf)
 4. George Karypis (2001)<a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.554.1671&rep=rep1&type=pdf">Evaluation of Item-Based Top-N Recommendation Algorithms</a>
 5. Sarwar et al. (2001) <a href="https://dl.acm.org/doi/10.1145/371920.372071"> Item-based collaborative filtering recommendation algorithms</a>
