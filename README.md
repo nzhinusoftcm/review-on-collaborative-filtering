@@ -1,25 +1,39 @@
 This repository presents a comprehensive implementation of collaborative filtering recommender systems, from memory-based collaborative filtering to more advanced machine learning algorithms. It starts by implementing basics collaborative filtering algorithms such as <b>user-based</b> collaborative filering also known as user-to-user collaborative filtering and <b>item-based</b> collaborative filtering (item-to-item collaborative filtering).
 
-## Requirements
+# Requirements
 
 1. numpy==1.18.1
 2. pandas==1.0.5
 3. python==3.6.10
 4. scikit-learn==0.23.1
 
-## Content
+# Content
 
-1. ```Download and explore movielen lasted small.ipynb``` : this notebook explore the <a href="https://grouplens.org/datasets/movielens/">movielen lasted small</a> dataset. This dataset is used throughout this repository to build collaborative filtering recommender systems.
+The topics covered in this repository are as follows : We first explore the movielen data
 
-2. ```user-based collaborative filtering.ipynb``` : implements user-based collaborative filtering.
+1. [Data exploration](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/1.%20Download%20and%20explore%20movielen%20lasted%20small.ipynb) (```Download and explore movielen lasted small.ipynb```) : this notebook explore the <a href="https://grouplens.org/datasets/movielens/">movielen lasted small</a> dataset. This dataset is used throughout this repository to build collaborative filtering recommender systems.
 
-3. ```item-based collaborative filtering.ipynb``` : implements item-based collaborative filtering.
+Then the model we implemented are the followings
 
-4. ```Singular Value Decomposition.ipynb``` : implements dimensionality reduction with Singular Value Decomposition for collaborative filtering recommender systems
+## 1. Memory-based Collaborative Filtering
 
-5. ```matrix factorization based collaborative filtering.ipynb```: builds and trains a Matrix Factorization based recommender system.
+Two main algorithms :
 
-## References
+2. [User-based (or user to user) Collaborative Filtering](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/2.%20user-based%20collaborative%20filtering.ipynb) (```user-based collaborative filtering.ipynb```) : implements user-based collaborative filtering.
+
+3. [Item-based (or item to item) Collaborative Filtering](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/3.%20item-based%20collaborative%20filtering.ipynb) (```item-based collaborative filtering.ipynb```) : implements item-based collaborative filtering.
+
+## 2. Model-based Collaborative Filtering
+
+### 2.1 Dimensionality reduction
+
+Here the explored models are :
+
+4. [Singular Value Decomposition (SVD)](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/4.%20Singular%20Value%20Decomposition.ipynb) (```Singular Value Decomposition.ipynb```) : implements dimensionality reduction with Singular Value Decomposition for collaborative filtering recommender systems
+
+5. [Regulariezd SVD (Matrix Factorization)](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/5.%20matrix%20factorization%20based%20collaborative%20filtering.ipynb) (```matrix factorization based collaborative filtering.ipynb```): builds and trains a Matrix Factorization based recommender system.
+
+# References
 
 1. Daniel Billsus  and  Michael J. Pazzani (1998). [Learning Collaborative Information Filters](https://www.ics.uci.edu/~pazzani/Publications/MLC98.pdf)
 2. Herlocker et al. (1999)<a href="https://dl.acm.org/doi/10.1145/3130348.3130372"> An Algorithmic Framework for Performing Collaborative Filtering</a>
@@ -31,6 +45,6 @@ This repository presents a comprehensive implementation of collaborative filteri
 8. Michael D. Ekstrand, et al. (2011). <a href="https://dl.acm.org/doi/10.1561/1100000009"> Collaborative Filtering Recommender Systems</a>
 9. J. Bobadilla et al. (2013)<a href="https://romisatriawahono.net/lecture/rm/survey/information%20retrieval/Bobadilla%20-%20Recommender%20Systems%20-%202013.pdf"> Recommender systems survey</a>
 
-## Author
+# Author
 
 <a href="https://www.linkedin.com/in/carmel-wenga-871876178/">Carmel WENGA</a>, Applied Machine Learning Research Engineer | <a href="https://shoppinglist.cm/fr/">ShoppingList</a>, Nzhinusoft
