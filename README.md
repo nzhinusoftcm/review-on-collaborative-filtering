@@ -33,6 +33,11 @@ Here the explored models are :
 
 5. [Regulariezd SVD (Matrix Factorization)](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/5.%20matrix%20factorization%20based%20collaborative%20filtering.ipynb) (```matrix factorization based collaborative filtering.ipynb```): builds and trains a Matrix Factorization based recommender system.
 
+### 2.2 Neural Networks based collaborative filtering
+
+6. Neural Network Matrix Factorization, (```neural networks matrix factorization.ipynb```): applies neural networks to matrix factorization.
+
+
 # References
 
 1. Daniel Billsus  and  Michael J. Pazzani (1998). [Learning Collaborative Information Filters](https://www.ics.uci.edu/~pazzani/Publications/MLC98.pdf)
@@ -44,7 +49,10 @@ Here the explored models are :
 7. Yehuda Koren et al. (2009). <a href='https://ieeexplore.ieee.org/document/5197422'>Matrix Factorization Techniques for Recommender Systems</a>
 8. Michael D. Ekstrand, et al. (2011). <a href="https://dl.acm.org/doi/10.1561/1100000009"> Collaborative Filtering Recommender Systems</a>
 9. J. Bobadilla et al. (2013)<a href="https://romisatriawahono.net/lecture/rm/survey/information%20retrieval/Bobadilla%20-%20Recommender%20Systems%20-%202013.pdf"> Recommender systems survey</a>
+10. Dziugaite and Roy (2015), [Neural Network Matrix Factorization](https://arxiv.org/abs/1511.06443)
+11. Xiangnan He et al. (2017), [Neural Collaborative Filtering](https://arxiv.org/abs/1708.05031)
+
 
 # Author
 
-<a href="https://www.linkedin.com/in/carmel-wenga-871876178/">Carmel WENGA</a>, Applied Machine Learning Research Engineer | <a href="https://shoppinglist.cm/fr/">ShoppingList</a>, Nzhinusoft
+[Carmel WENGA](https://www.linkedin.com/in/carmel-wenga-871876178/), Applied Machine Learning Research Engineer | [ShoppingList](https://shoppinglist.cm), Nzhinusoft
