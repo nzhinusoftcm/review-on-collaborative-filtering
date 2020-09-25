@@ -35,7 +35,7 @@ Here the explored models are :
 
 ### 2.2 Neural Networks based collaborative filtering
 
-6. [Neural Network Matrix Factorization](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/5.%20matrix%20factorization%20based%20collaborative%20filtering.ipynb), (```neural networks matrix factorization.ipynb```): applies neural networks to matrix factorization.
+6. [Neural Network Matrix Factorization](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/6.%20neural%20networks%20matrix%20factorization.ipynb), (```neural networks matrix factorization.ipynb```): applies neural networks to matrix factorization.
 
 
 # References
