@@ -6,6 +6,7 @@ This repository presents a comprehensive implementation of collaborative filteri
 2. pandas==1.0.5
 3. python==3.6.10
 4. scikit-learn==0.23.1
+5. tensorflow==2.3.0
 
 # Content
 
