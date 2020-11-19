@@ -15,7 +15,7 @@ This repository presents a comprehensive implementation of collaborative filteri
 
 The topics covered in this repository are as follows : We first explore the movielen data
 
-1. [Data exploration](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/1.%20Download%20and%20explore%20movielen%20lasted%20small.ipynb) (```Download and explore movielen lasted small.ipynb```) : this notebook explore the <a href="https://grouplens.org/datasets/movielens/">movielen lasted small</a> dataset. This dataset is used throughout this repository to build collaborative filtering recommender systems.
+1. [Data exploration](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/1.Download_and_explore_movielen_lasted_small.ipynb) (```Download and explore movielen lasted small.ipynb```) : this notebook explore the <a href="https://grouplens.org/datasets/movielens/">movielen lasted small</a> dataset. This dataset is used throughout this repository to build collaborative filtering recommender systems.
 
 Then the model we implemented are the followings
 
@@ -23,9 +23,9 @@ Then the model we implemented are the followings
 
 Two main algorithms :
 
-2. [User-based (or user to user) Collaborative Filtering](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/2.%20user-based%20collaborative%20filtering.ipynb) (```user-based collaborative filtering.ipynb```) : implements user-based collaborative filtering.
+2. [User-based (or user to user) Collaborative Filtering](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/2.user-based_collaborative_filtering.ipynb) (```user-based collaborative filtering.ipynb```) : implements user-based collaborative filtering.
 
-3. [Item-based (or item to item) Collaborative Filtering](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/3.%20item-based%20collaborative%20filtering.ipynb) (```item-based collaborative filtering.ipynb```) : implements item-based collaborative filtering.
+3. [Item-based (or item to item) Collaborative Filtering](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/3.item-based_collaborative_filtering.ipynb) (```item-based collaborative filtering.ipynb```) : implements item-based collaborative filtering.
 
 ## 2. Model-based Collaborative Filtering
 
@@ -33,13 +33,13 @@ Two main algorithms :
 
 Here the explored models are :
 
-4. [Singular Value Decomposition (SVD)](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/4.%20Singular%20Value%20Decomposition.ipynb) (```Singular Value Decomposition.ipynb```) : implements dimensionality reduction with Singular Value Decomposition for collaborative filtering recommender systems
+4. [Singular Value Decomposition (SVD)](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/4.Singular_Value_Decomposition.ipynb) (```Singular Value Decomposition.ipynb```) : implements dimensionality reduction with Singular Value Decomposition for collaborative filtering recommender systems
 
-5. [Regulariezd SVD (Matrix Factorization)](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/5.%20matrix%20factorization%20based%20collaborative%20filtering.ipynb) (```matrix factorization based collaborative filtering.ipynb```): builds and trains a Matrix Factorization based recommender system.
+5. [Regulariezd SVD (Matrix Factorization)](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/5.Regularized_SVD(Matrix_Factorization).ipynb) (```matrix factorization based collaborative filtering.ipynb```): builds and trains a Matrix Factorization based recommender system.
 
 ### 2.2 Neural Networks based collaborative filtering
 
-6. [Neural Network Matrix Factorization](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/6.%20neural%20networks%20matrix%20factorization.ipynb), (```neural networks matrix factorization.ipynb```): applies neural networks to matrix factorization.
+6. [Neural Network Matrix Factorization](https://github.com/nzhinusoftcm/review-on-collaborative-filtering/blob/master/6.neural_networks_matrix_factorization.ipynb), (```neural networks matrix factorization.ipynb```): applies neural networks to matrix factorization.
 
 
 # References
