@@ -6,6 +6,7 @@ import os
 
 DOWNLOAD_DESTINATION_DIR = "dataset"
 
+
 def unzip(name):
     path = os.path.join(DOWNLOAD_DESTINATION_DIR, name)
     print(f"Unzipping the {name} zip file ...")
@@ -13,9 +14,11 @@ def unzip(name):
     with zipfile.ZipFile(path, 'r') as data:
         data.extractall(DOWNLOAD_DESTINATION_DIR)
 
+
 def _progress(count, block_size, total_size):
     sys.stdout.write('\rDownload data %.1f%%' % (float(count * block_size)/float(total_size) * 100.0))
     sys.stdout.flush()
+
 
 def download(url, name):
     path = os.path.join(DOWNLOAD_DESTINATION_DIR, name)
@@ -28,7 +31,8 @@ def download(url, name):
         print('Successfully downloaded', name, statinfo.st_size, 'bytes.')
         unzip(name)
 
-class mlLastedSmall:
+
+class mlLatestSmall:
 
     @staticmethod
     def load():        
@@ -56,6 +60,7 @@ class mlLastedSmall:
         
         return ratings, movies
 
+
 class ml100k:
 
     @staticmethod
@@ -71,6 +76,8 @@ class ml100k:
             sep='\t',
             names=["userid", "itemid", "rating", "timestamp"],
         )
+        ratings = ratings.sort_values(by=['userid', 'itemid']).reset_index(drop=True)
+        ratings = ratings.drop(columns=['timestamp'])
 
         movies_columns = [
             'itemid', 'title', 'release date', 'video release date', 
@@ -89,9 +96,10 @@ class ml100k:
         )
         # drop non necessary columns. From the third to the last column
         todrop = list(range(2, len(movies.columns)))
-        movies = movies.drop(movies.columns[todrop], axis=1) 
+        movies = movies.drop(movies.columns[todrop], axis=1)
         
         return ratings, movies
+
 
 class ml1m:
 
@@ -109,6 +117,8 @@ class ml1m:
             names=["userid", "itemid", "rating", "timestamp"],
             engine='python'
         )
+        ratings = ratings.sort_values(by=['userid', 'itemid']).reset_index(drop=True)
+        ratings = ratings.drop(columns=['timestamp'])
 
         movies_path = os.path.join(DOWNLOAD_DESTINATION_DIR, name, 'movies.dat')
         movies = pd.read_csv(

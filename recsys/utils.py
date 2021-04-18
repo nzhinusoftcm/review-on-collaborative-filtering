@@ -4,6 +4,7 @@ import zipfile
 import sys
 import os
 
+
 def download_data():
     
     url = "http://files.grouplens.org/datasets/movielens/ml-latest-small.zip"
@@ -44,6 +45,7 @@ def load_ratings(ratings_csv):
     ratings = ratings.drop('timestamp', axis=1)
     
     return ratings
+
 
 def load_movies(movies_csv):
     

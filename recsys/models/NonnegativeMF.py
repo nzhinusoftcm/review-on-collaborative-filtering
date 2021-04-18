@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class NMF:
     
     def __init__(self, ratings, m, n, uencoder, iencoder, K=10, lambda_P=0.01, lambda_Q=0.01):
@@ -12,7 +13,7 @@ class NMF:
         self.P = np.random.rand(m, K)
         self.Q = np.random.rand(n, K)
         
-        # hyperparameter initialization
+        # hyper parameter initialization
         self.lambda_P = lambda_P
         self.lambda_Q = lambda_Q
 
@@ -22,9 +23,9 @@ class NMF:
         
         # training history
         self.history = {
-            "epochs":[],
-            "loss":[],
-            "val_loss":[],
+            "epochs": [],
+            "loss": [],
+            "val_loss": [],
         }
     
     def print_training_parameters(self):
@@ -35,7 +36,7 @@ class NMF:
         """
         returns the Mean Absolute Error
         """
-        # number of training exemples
+        # number of training examples
         M = x_train.shape[0]
         error = 0
         for pair, r in zip(x_train, y_train):
@@ -44,36 +45,31 @@ class NMF:
         return error/M
     
     def ratings_by_this_user(self, userid):
-        return self.ratings.loc[self.ratings.userid==userid]
+        return self.ratings.loc[self.ratings.userid == userid]
     
     def ratings_on_this_items(self, itemid):
-        return self.ratings.loc[self.ratings.itemid==itemid]
+        return self.ratings.loc[self.ratings.itemid == itemid]
     
     def update_rule(self, u, i, error):
         I = self.ratings_by_this_user(u)
         U = self.ratings_on_this_items(i)    
         
         for k in range(self.K):
-            
-            num_uk = self.P[u,k] * np.sum(np.multiply(self.Q[I.itemid.to_list(),k], I.rating.to_list()))
-            dem_uk = np.sum(np.multiply(
-                self.Q[I.itemid.to_list(),k], 
-                np.dot(self.P[u], self.Q[I.itemid.to_list()].T))
-                           ) + self.lambda_P * len(I) * self.P[u,k]
-            self.P[u,k] = num_uk / dem_uk
+            num_uk = self.P[u, k] * np.sum(np.multiply(self.Q[I.itemid.to_list(), k], I.rating.to_list()))
+            dem_uk = np.sum(np.multiply(self.Q[I.itemid.to_list(), k], np.dot(self.P[u], self.Q[I.itemid.to_list()].T))
+                            ) + self.lambda_P * len(I) * self.P[u, k]
+            self.P[u, k] = num_uk / dem_uk
                 
-            num_ik = self.Q[i,k] * np.sum(np.multiply(self.P[U.userid.to_list(),k], U.rating.to_list()))
-            dem_ik = np.sum(np.multiply(
-                self.P[U.userid.to_list(),k], 
-                np.dot(self.P[U.userid.to_list()], self.Q[i].T))
-                           ) + self.lambda_Q * len(U) * self.Q[i,k]
-            self.Q[i,k] = num_ik / dem_ik
-                
-    
-    def print_training_progress(self, epoch, epochs, error, val_error, steps=5):
-        if epoch == 1 or epoch % steps == 0 :
+            num_ik = self.Q[i, k] * np.sum(np.multiply(self.P[U.userid.to_list(), k], U.rating.to_list()))
+            dem_ik = np.sum(np.multiply(self.P[U.userid.to_list(), k], np.dot(self.P[U.userid.to_list()], self.Q[i].T))
+                            ) + self.lambda_Q * len(U) * self.Q[i, k]
+            self.Q[i, k] = num_ik / dem_ik
+
+    @staticmethod
+    def print_training_progress(epoch, epochs, error, val_error, steps=5):
+        if epoch == 1 or epoch % steps == 0:
                 print("epoch {}/{} - loss : {} - val_loss : {}".format(
-                    epoch, epochs, round(error,3), round(val_error,3)))
+                    epoch, epochs, round(error, 3), round(val_error, 3)))
                 
     def fit(self, x_train, y_train, validation_data, epochs=10):
 
@@ -81,7 +77,7 @@ class NMF:
         x_test, y_test = validation_data
         for epoch in range(1, epochs+1):
             for pair, r in zip(x_train, y_train):
-                u,i = pair
+                u, i = pair
                 r_hat = np.dot(self.P[u], self.Q[i])
                 e = abs(r - r_hat)
                 self.update_rule(u, i, e)                
@@ -126,4 +122,4 @@ class NMF:
         # take corresponding predictions for top N indices
         preds = predictions[top_idx]
 
-        return top_items, preds  
+        return top_items, preds

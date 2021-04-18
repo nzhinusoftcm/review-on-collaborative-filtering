@@ -1,17 +1,17 @@
 import numpy as np
 
+
 class MF:
     
     def __init__(self, m, n, k=10, alpha=0.001, lamb=0.01):
         """
-        Initialization of the model        
-        : param
-            - m : number of users
-            - n : number of items
-            - k : length of latent factor, both for users and items. 50 by default
-            - alpha : learning rate. 0.001 by default
-            - lamb : regularizer parameter. 0.01 by default
+        :param m: number of users
+        :param n: number of items
+        :param k: length of latent factor, both for users and items. 50 by default
+        :param alpha: learning rate. 0.001 by default
+        :param lamb: regularizer parameter. 0.01 by default
         """
+
         np.random.seed(32)
         
         # initialize the latent factor matrices P and Q (of shapes (m,k) and (n,k) respectively) that will be learnt
@@ -25,9 +25,9 @@ class MF:
         
         # training history
         self.history = {
-            "epochs":[],
-            "loss":[],
-            "val_loss":[],
+            "epochs": [],
+            "loss": [],
+            "val_loss": [],
         }
     
     def print_training_parameters(self):
@@ -43,22 +43,23 @@ class MF:
         returns the Mean Absolute Error
         """
         # number of training exemples
-        M = x_train.shape[0]
+        total = x_train.shape[0]
         error = 0
         for pair, r in zip(x_train, y_train):
             u, i = pair
             error += abs(r - np.dot(self.P[u], self.Q[i]))
-        return error/M
-    
-    def print_training_progress(self, epoch, epochs, error, val_error, steps=5):
-        if epoch == 1 or epoch % steps == 0 :
-            print("epoch {}/{} - loss : {} - val_loss : {}".format(epoch, epochs, round(error,3), round(val_error,3)))
+        return error / total
+
+    @staticmethod
+    def print_training_progress(epoch, epochs, error, val_error, steps=5):
+        if epoch == 1 or epoch % steps == 0:
+            print("epoch {}/{} - loss : {} - val_loss : {}".format(epoch, epochs, round(error, 3), round(val_error, 3)))
                 
-    def learning_rate_schedule(self, epoch, target_epochs = 20):
+    def learning_rate_schedule(self, epoch, target_epochs=20):
         if (epoch >= target_epochs) and (epoch % target_epochs == 0):
-                factor = epoch // target_epochs
-                self.alpha = self.alpha * (1 / (factor * 20))
-                print("\nLearning Rate : {}\n".format(self.alpha))
+            factor = epoch // target_epochs
+            self.alpha = self.alpha * (1 / (factor * 20))
+            print("\nLearning Rate : {}\n".format(self.alpha))
     
     def fit(self, x_train, y_train, validation_data, epochs=1000):
         """
@@ -84,7 +85,7 @@ class MF:
             for pair, r in zip(x_train, y_train):
                 
                 # get encoded values of userid and itemid from pair
-                u,i = pair
+                u, i = pair
                 
                 # compute the predicted rating r_hat
                 r_hat = np.dot(self.P[u], self.Q[i])
@@ -121,43 +122,29 @@ class MF:
     def evaluate(self, x_test, y_test):
         """
         compute the global error on the test set
-        
-        :param
-            - x_test : test pairs (u,i) for which rating r_ui is known
-            - y_test : set of ratings r_ui for all test pairs (u,i)
+        :param x_test : test pairs (u,i) for which rating r_ui is known
+        :param y_test : set of ratings r_ui for all test pairs (u,i)
         """
         error = self.mae(x_test, y_test)
         print(f"validation error : {round(error,3)}")
-        
         return error
       
-    def predict(self, userid, itemid, uencoder, iencoder):
+    def predict(self, userid, itemid):
         """
         Make rating prediction for a user on an item
-
-        :param
-        - userid
-        - itemid
-
-        :return
-        - r : predicted rating
+        :param userid
+        :param itemid
+        :return r : predicted rating
         """
-        # encode user and item ids to be able to access their latent factors in
-        # matrices P and Q
-        u = uencoder.transform([userid])[0]
-        i = iencoder.transform([itemid])[0]
-
         # rating prediction using encoded ids. Dot product between P_u and Q_i
-        r = np.dot(self.P[u], self.Q[i])
+        r = np.dot(self.P[userid], self.Q[itemid])
 
         return r
 
-    def recommend(self, userid, uencoder, iencoder, N=30):
+    def recommend(self, userid, uencoder, iencoder, n=30):
         """
-        make to N recommendations for a given user
-
-        :return 
-        - (top_items,preds) : top N items with the highest predictions 
+        make top n recommendations for a given user
+        :return (top_items,preds) : top N items with the highest predictions
         with their corresponding predictions
         """
         # encode the userid
@@ -167,7 +154,7 @@ class MF:
         predictions = np.dot(self.P[u], self.Q.T)
 
         # get the indices of the top N predictions
-        top_idx = np.flip(np.argsort(predictions))[:N]
+        top_idx = np.flip(np.argsort(predictions))[:n]
 
         # decode indices to get their corresponding itemids
         top_items = iencoder.inverse_transform(top_idx)
