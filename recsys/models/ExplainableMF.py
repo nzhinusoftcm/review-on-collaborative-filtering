@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class EMF:
     
     def __init__(self, m, n, W, alpha=0.001, beta=0.01, lamb=0.1, k=10):
@@ -94,20 +95,18 @@ class EMF:
         print(f"MAE : {round(error,3)}")
         return error
 
-def explainable_score(u2uModel, users, items, uencoder, iencoder, theta=0):
+
+def explainable_score(u2uModel, users, items, theta=0):
     # initialize explainable score to zeros
     print('Compute explainable scores ...')
     W = np.zeros((len(users), len(items)))    
-    for u in uencoder.transform(users):            
-        user_neighbors = u2uModel.neighbors[u][1:]
-        candidate_items = u2uModel.find_user_candidate_items(u,user_neighbors)
-        candidate_items = iencoder.transform(candidate_items)        
-        for i in candidate_items:                
-            user_who_rated_i, similar_user_who_rated_i = \
-                u2uModel.similar_users_who_rated_this_item(i, user_neighbors)            
+    for u in users:
+        candidate_items = u2uModel.find_user_candidate_items(u)
+        for i in candidate_items:
+            user_who_rated_i, similar_user_who_rated_i = u2uModel.similar_users_who_rated_this_item(u, i)
             if len(user_who_rated_i) == 0:
                 w = 0.0
             else:
                 w = len(similar_user_who_rated_i) / len(user_who_rated_i)            
-            W[u,i] =  w  if w > theta else 0.0             
+            W[u, i] = w if w > theta else 0.0
     return W

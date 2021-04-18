@@ -9,6 +9,7 @@ class NMF:
         
         # initialize the latent factor matrices P and Q (of shapes (m,k) and (n,k) respectively) that will be learnt
         self.ratings = ratings
+        self.np_ratings = ratings.to_numpy()
         self.K = K
         self.P = np.random.rand(m, K)
         self.Q = np.random.rand(n, K)
@@ -37,33 +38,30 @@ class NMF:
         returns the Mean Absolute Error
         """
         # number of training examples
-        M = x_train.shape[0]
+        m = x_train.shape[0]
         error = 0
         for pair, r in zip(x_train, y_train):
             u, i = pair
             error += abs(r - np.dot(self.P[u], self.Q[i]))
-        return error/M
+        return error / m
     
     def ratings_by_this_user(self, userid):
         return self.ratings.loc[self.ratings.userid == userid]
     
     def ratings_on_this_items(self, itemid):
         return self.ratings.loc[self.ratings.itemid == itemid]
-    
-    def update_rule(self, u, i, error):
-        I = self.ratings_by_this_user(u)
-        U = self.ratings_on_this_items(i)    
-        
-        for k in range(self.K):
-            num_uk = self.P[u, k] * np.sum(np.multiply(self.Q[I.itemid.to_list(), k], I.rating.to_list()))
-            dem_uk = np.sum(np.multiply(self.Q[I.itemid.to_list(), k], np.dot(self.P[u], self.Q[I.itemid.to_list()].T))
-                            ) + self.lambda_P * len(I) * self.P[u, k]
-            self.P[u, k] = num_uk / dem_uk
-                
-            num_ik = self.Q[i, k] * np.sum(np.multiply(self.P[U.userid.to_list(), k], U.rating.to_list()))
-            dem_ik = np.sum(np.multiply(self.P[U.userid.to_list(), k], np.dot(self.P[U.userid.to_list()], self.Q[i].T))
-                            ) + self.lambda_Q * len(U) * self.Q[i, k]
-            self.Q[i, k] = num_ik / dem_ik
+
+    def update_rule(self, u, i):
+        I = self.np_ratings[self.np_ratings[:, 0] == u][:, [1, 2]]
+        U = self.np_ratings[self.np_ratings[:, 1] == i][:, [0, 2]]
+
+        num = self.P[u] * np.dot(self.Q[I[:, 0]].T, I[:, 1])
+        dem = np.dot(self.Q[I[:, 0]].T, np.dot(self.P[u], self.Q[I[:, 0]].T)) + self.lambda_P * len(I) * self.P[u]
+        self.P[u] = num / dem
+
+        num = self.Q[i] * np.dot(self.P[U[:, 0]].T, U[:, 1])
+        dem = np.dot(self.P[U[:, 0]].T, np.dot(self.P[U[:, 0]], self.Q[i].T)) + self.lambda_Q * len(U) * self.Q[i]
+        self.Q[i] = num / dem
 
     @staticmethod
     def print_training_progress(epoch, epochs, error, val_error, steps=5):
@@ -76,13 +74,13 @@ class NMF:
         self.print_training_parameters()
         x_test, y_test = validation_data
         for epoch in range(1, epochs+1):
+            error = 0
             for pair, r in zip(x_train, y_train):
                 u, i = pair
                 r_hat = np.dot(self.P[u], self.Q[i])
-                e = abs(r - r_hat)
-                self.update_rule(u, i, e)                
-            # training and validation error  after this epochs
-            error = self.mae(x_train, y_train)
+                error = error + abs(r - r_hat)
+                self.update_rule(u, i)
+            # validation error  after this epochs
             val_error = self.mae(x_test, y_test)
             self.update_history(epoch, error, val_error)
             self.print_training_progress(epoch, epochs, error, val_error, steps=1)
@@ -106,7 +104,7 @@ class NMF:
         r = np.dot(self.P[u], self.Q[i])
         return r
 
-    def recommend(self, userid, N=30):
+    def recommend(self, userid, n=30):
         # encode the userid
         u = self.uencoder.transform([userid])[0]
 
@@ -114,7 +112,7 @@ class NMF:
         predictions = np.dot(self.P[u], self.Q.T)
 
         # get the indices of the top N predictions
-        top_idx = np.flip(np.argsort(predictions))[:N]
+        top_idx = np.flip(np.argsort(predictions))[:n]
 
         # decode indices to get their corresponding itemids
         top_items = self.iencoder.inverse_transform(top_idx)
